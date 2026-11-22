@@ -7,12 +7,13 @@
 #include "team_info.h"
 #include "team_update.h"
 
-const int address_count = 16; // total number of addresses in the list
+const int address_count = 17; // total number of addresses in the list
 
 const char* team_names[address_count] PROGMEM = {
   "debug test", // debug
   "RAAM", // 1
   "Heavy Lifters", // 2
+  "Claude's Disciples", // 3
   "Matthew^2", // 5
   "IDC", // 7
   "Solidly Not Working", // 8
@@ -32,6 +33,7 @@ const uint8_t address_list[address_count][6] PROGMEM = {
   {0xec, 0xe3, 0x34, 0x21, 0x8c, 0xa0}, // debug
   {0x80, 0xf3, 0xda, 0x41, 0x45, 0xe8}, // 1
   {0x58, 0x2a, 0xbd, 0x70, 0x99, 0x48}, // 2
+  {0x58, 0x2a, 0xbd, 0x70, 0x97, 0x70}, // 3
   {0xd4, 0xe9, 0xf4, 0xb3, 0xce, 0xc0}, // 5
   {0x58, 0x2a, 0xbd, 0x70, 0xf9, 0x54}, // 7
   {0x80, 0xf3, 0xda, 0x42, 0xb1, 0x24}, // 8
@@ -109,6 +111,7 @@ void setup() {
     Serial.println("Could not add broadcast peer");
     return;
   }
+  delay(500); // delay for stability; we don't want it to nuke all nearby controllers the instant it gets power
 
   std::vector<TeamInfo> team_info_list;
   team_info_list.reserve(address_count);
